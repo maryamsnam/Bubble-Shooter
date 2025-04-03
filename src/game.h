@@ -1,21 +1,23 @@
 #pragma once
 #include <iostream>
+#include <cstdlib>
+#include <conio.h>
 
-struct Player {
-    std::string name;
-    int id;
-    int password;
-};
+using namespace std;
 
-// Enemy functions
+// Game variables
+extern int enemyX[4], enemyY[4];
+extern int enemyFlag[4];
+extern int bullets[20][4];
+extern int shooter[3][5];
+extern int shooterposition;
+
+// Game functions
 void genEnemy(int ind);
 void drawEnemy(int ind);
-
-// Bullet functions
 void genbullet();
 void movebullet();
 void drawbullets();
-
-// Shooter functions
 void drawshooter();
 int collision();
+void gameLoop();
