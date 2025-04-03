@@ -83,3 +83,43 @@ void gameLoop() {
     
     for(int i=0; i<4; i++) {
         enemyY[i] = 1;
+        genEnemy(i);
+        enemyFlag[i] = 1;
+    }
+    
+    while(1) {
+        system("cls");
+        
+        if(kbhit()) {
+            char key = getch();
+            if(key == 'a' && shooterposition > 0) shooterposition -= 4;
+            if(key == 'd' && shooterposition < 72) shooterposition += 4;
+            if(key == 32) genbullet();
+        }
+        
+        drawshooter();
+        drawbullets();
+        
+        for(int i=0; i<4; i++) {
+            drawEnemy(i);
+            enemyY[i]++;
+            
+            if(enemyY[i] == 10) {
+                enemyY[i] = 1;
+                genEnemy(i);
+            }
+        }
+        
+        movebullet();
+        
+        if(collision()) {
+            system("cls");
+            cout << "Game Over!" << endl;
+            cout << "Press any key to return to menu...";
+            getch();
+            break;
+        }
+        
+        Sleep(100);
+    }
+}
